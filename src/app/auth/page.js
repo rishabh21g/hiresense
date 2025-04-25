@@ -3,15 +3,19 @@ import { BsGoogle } from "react-icons/bs";
 import { sb } from "../services/supabaseClient";
 
 const Auth = () => {
-  const signInWithGoogle = async () => {
-    const { error } = await sb.auth.signInWithOAuth({
-      provider: "google"
-    });
-
-    if (error) {
-      console.error("Login error:", error.message);
+  const signInWithGoogle = async()=>{
+   const {data : user , error : err} =  await sb.auth.signInWithOAuth({
+      provider :"google",
+      // options:{
+      //   redirectTo:"http://localhost:3000/Welcome"
+      // }
+    })
+    if(err){
+      console.log("Something went wrong: " + err)
+    }else{
+      console.log(user)
     }
-  };
+  }
 
   return (
     <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]">
