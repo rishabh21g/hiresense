@@ -3,9 +3,9 @@ import DashboardProvider from "./provider.js";
 const DashboardLayout = ({ children }) => {
   return (
     <UserProvider>
-      <div>
+      <div className="w-full">
         <DashboardProvider>
-          <div className="p-10 mx-auto my-4">{children}</div>
+          <div className="p-10 mx-auto my-4 w-full">{children}</div>
         </DashboardProvider>
       </div>
     </UserProvider>

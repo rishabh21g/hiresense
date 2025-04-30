@@ -1,13 +1,20 @@
-import CreateOptions from "../dashboard/_components/CreateOptions"
-import Welcome from "../dashboard/_components/Welcome"
 
-
+import Welcome from "./_components/Welcome"
+import CreateOptions from "./_components/CreateOptions"
+import InterviewList from "./_components/InterviewList"
 const Dashboard = () => {
   return (
-    <div>
-      <Welcome/>
+
+     <>
+      <div className="w-full h-full mx-auto flex-col gap-6">
+      {/* <Welcome /> */}
+      <h2 className="text-3xl font-bold mt-4">Dashboard</h2>
       <CreateOptions/>
-    </div>
+      <InterviewList/>
+      
+      </div>
+     </>
+    
   )
 }
 export default Dashboard
