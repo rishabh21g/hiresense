@@ -1,27 +1,26 @@
 "use client";
-import React, { useState } from "react";
+import { InterviewTypes } from "@/app/services/Constant";
+import React, { useEffect, useState } from "react";
+import { toast } from "sonner";
 
-const InterviewForm = () => {
-  const [jobPosition, setJobPosition] = useState("");
-  const [jobDescription, setJobDescription] = useState("");
-  const [duration, setDuration] = useState("15min");
-  const [selectedTypes, setSelectedTypes] = useState([]);
-
-  const handleTypeChange = (type) => {
-    setSelectedTypes((prev) =>
-      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
-    );
+const InterviewForm = ({ handleFormData, formData, setsteps }) => {
+  const goTonext = () => {
+    if (
+      !formData.jobPosition ||
+      !formData.jobDescription ||
+      !formData.duration ||
+      !formData.types
+    ) {
+      toast("Please fill up all the details");
+    } else {
+      console.log(formData);
+      setsteps((prev) => prev + 1);
+    }
   };
-
-  const generateQuestions = () => {
-    console.log("Generating questions with:", {
-      jobPosition,
-      jobDescription,
-      duration,
-      selectedTypes,
-    });
-  };
-
+  const [selectTypes, setSelectTypes] = useState([]);
+  useEffect(() => {
+    handleFormData("types", selectTypes);
+  }, [selectTypes]);
   return (
     <div className="flex flex-col gap-6 w-full mx-auto mt-10 p-6  shadow-md rounded-xl">
       {/* Job Position */}
@@ -32,8 +31,7 @@ const InterviewForm = () => {
         <input
           type="text"
           placeholder="e.g. Fullstack MERN Developer"
-          value={jobPosition}
-          onChange={(e) => setJobPosition(e.target.value)}
+          onChange={(e) => handleFormData("jobPosition", e.target.value)}
           className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
@@ -45,8 +43,7 @@ const InterviewForm = () => {
         </label>
         <textarea
           placeholder="Short job description..."
-          value={jobDescription}
-          onChange={(e) => setJobDescription(e.target.value)}
+          onChange={(e) => handleFormData("jobDescription", e.target.value)}
           rows={4}
           className="w-full px-4 py-2 border rounded-lg outline-none resize-none focus:ring-2 focus:ring-blue-500"
         />
@@ -58,8 +55,7 @@ const InterviewForm = () => {
           Interview Duration
         </label>
         <select
-          value={duration}
-          onChange={(e) => setDuration(e.target.value)}
+          onChange={(e) => handleFormData("duration", e.target.value)}
           className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
         >
           <option value="15min">15 min</option>
@@ -74,34 +70,34 @@ const InterviewForm = () => {
         <label className="block text-sm font-medium text-gray-700 mb-2">
           Interview Types
         </label>
-        <div className="grid grid-cols-2 gap-2">
-          {[
-            "technical",
-            "problem-solving",
-            "experience",
-            "leadership",
-            "behavioural",
-          ].map((type) => (
-            <label
-              key={type}
-              className="flex items-center gap-2 text-sm capitalize"
-            >
-              <input
-                type="checkbox"
-                checked={selectedTypes.includes(type)}
-                onChange={() => handleTypeChange(type)}
-                className="accent-blue-600"
-              />
-              {type.replace("-", " ")}
-            </label>
-          ))}
+        <div className="flex flex-wrap gap-5 ">
+          {InterviewTypes.map((category, idx) => {
+            let isSelected = selectTypes.includes(category.type);
+            return (
+              <p
+                key={idx}
+                className={`flex items-center gap-2 text-sm capitalize bg-gray-200 rounded-full justify-center p-3 cursor-pointer ${
+                  isSelected && "border border-black"
+                }`}
+                onClick={() =>
+                  setSelectTypes((prevdata) =>
+                    prevdata.includes(category.type)
+                      ? prevdata.filter((item) => item !== category.type)
+                      : [...prevdata, category.type]
+                  )
+                }
+              >
+                {category.type} <span className="size-6">{category.icon}</span>
+              </p>
+            );
+          })}
         </div>
       </div>
 
       {/* Generate Button */}
       <button
-        onClick={generateQuestions}
         className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition"
+        onClick={goTonext}
       >
         Generate Questions
       </button>
