@@ -1,14 +1,115 @@
-import React, { useEffect } from 'react'
+"use client";
+import { sb } from "@/app/services/supabaseClient";
+import { Button } from "@/components/ui/button";
+import { useUser } from "@/context/UserContext";
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+import { Loader, Loader2 } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { toast } from "sonner";
 
-const QuestionList = ({formData}) => {
-  useEffect(()=>{
-    if(formData){
-      generateQuestions()
+const QuestionList = ({ formData, createLink, setsteps, steps }) => {
+  const [loading, setloading] = useState(false);
+  const [loader, setloader] = useState(false);
+  const [questionList, setQuestionList] = useState([]);
+  const user = useUser();
+  const { jobDescription, jobPosition, types, duration } = formData;
+  const generateQuestions = async () => {
+    try {
+      setloading(true);
+      const result = await axios.post("/api/questions", { ...formData });
+      console.log(result)
+      const jsonList = result?.data?.content;
+      console.log(jsonList)
+      const jsonArr = jsonList.replace("```json", "").replace("```", "").trim();
+      console.log(jsonArr)
+      const jsonArrQuestion = JSON.parse(jsonArr);
+      console.log(jsonArrQuestion)
+      console.log(jsonArrQuestion);
+      setQuestionList(jsonArrQuestion?.interviewQuestions);
+    } catch (err) {
+      console.error(err);
+      toast("Server error. Try again later!");
+    } finally {
+      setloading(false);
     }
-  } , [])
-  return (
-    <div>QuestionList</div>
-  )
-}
+  };
 
-export default QuestionList
+  const onFinish = async () => {
+    setloader(true);
+    const interview_id = uuidv4();
+    try {
+      const { data, error } = await sb
+        .from("Interviews")
+        .insert([
+          {
+            questionList: questionList,
+            userEmail: user?.user_metadata?.email,
+            jobPosition: jobPosition,
+            jobDescription: jobDescription,
+            duration: duration,
+            types: types,
+            interview_id: interview_id,
+          },
+        ])
+        .select();
+      console.log(data);
+      setloader(false);
+      createLink(interview_id);
+      setsteps(steps + 1);
+    } catch (err) {
+      toast("Error while saving Questions!");
+      console.log(err);
+      setloader(false);
+    }
+  };
+
+  useEffect(() => {
+    if (formData) {
+      generateQuestions();
+      // console.log(questionList);
+    }
+  }, [formData]);
+
+  return (
+    <div className="w-full my-2 mx-auto flex flex-col items-center justify-center p-5">
+      {loading && (
+        <div className="flex flex-col gap-4 my-3 items-center rounded-lg bg-amber-100 p-6 border border-amber-300 w-full">
+          <h2 className="animate-pulse font-semibold text-lg flex items-center gap-2">
+            Wait for a while until we craft questions!
+            <span>
+              <Loader className="animate-spin text-amber-400" />
+            </span>
+          </h2>
+        </div>
+      )}
+
+      {!loading && questionList?.length > 0 && (
+        <div className="w-full mt-4">
+          <h2 className="text-xl font-semibold mb-3">Generated Questions:</h2>
+          <ul className="space-y-3">
+            {questionList?.map((item, index) => (
+              <li key={index} className="p-4 border rounded-lg shadow bg-white">
+                <p className="font-medium">{item?.question}</p>
+                <p className="text-sm text-gray-500">Type: {item?.type}</p>
+              </li>
+            ))}
+          </ul>
+          <div className="flex items-end justify-end my-3">
+            <Button onClick={onFinish}>
+              {" "}
+              {loader && (
+                <span className="animate-spin">
+                  <Loader2 />
+                </span>
+              )}
+              Finish{" "}
+            </Button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default QuestionList;
