@@ -6,7 +6,7 @@ import { sb } from "@/app/services/supabaseClient";
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState();
 
   const getUserOrCreateUser = async () => {
     try {
@@ -38,11 +38,11 @@ export const UserProvider = ({ children }) => {
 
           if (insertError) throw insertError;
 
-          console.log(" New user created:", newUser);
+          // console.log(" New user created:", newUser);
         }
 
         setUser(user);
-        console.log(" User set successfully:", user);
+        // console.log(" User set successfully:", user);
       }
     } catch (error) {
       console.error(" Error in getUserOrCreateUser:", error.message);
@@ -50,13 +50,13 @@ export const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log(" Fetching or Creating User...");
+    // console.log(" Fetching or Creating User...");
     getUserOrCreateUser();
   }, []);
 
   useEffect(() => {
     if (user) {
-      console.log("User updated in Context:", user);
+      // console.log("User updated in Context:", user);
     }
   }, [user]);
 

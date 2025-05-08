@@ -1,20 +1,15 @@
-
-import Welcome from "./_components/Welcome"
-import CreateOptions from "./_components/CreateOptions"
-import InterviewList from "./_components/InterviewList"
+import CreateOptions from "./_components/CreateOptions";
+import InterviewList from "./_components/InterviewList";
+import { UserProvider } from "@/context/UserContext";
 const Dashboard = () => {
   return (
-
-     <>
+    <UserProvider>
       <div className="w-full h-full mx-auto flex-col gap-6">
-      {/* <Welcome /> */}
-      <h2 className="text-3xl font-bold mt-4">Dashboard</h2>
-      <CreateOptions/>
-      <InterviewList/>
-      
+        <h2 className="text-3xl font-bold mt-4">Dashboard</h2>
+        <CreateOptions />
+        <InterviewList />
       </div>
-     </>
-    
-  )
-}
-export default Dashboard
+    </UserProvider>
+  );
+};
+export default Dashboard;
