@@ -5,9 +5,9 @@ import { createContext, useContext, useEffect, useState } from "react"
 
  export const InterviewContextProvider = ({ children }) =>{
   const [interviewInfo, setInterviewInfo] = useState(null)
-  useEffect(()=>{
-    console.log(interviewInfo)
-  }, [interviewInfo])
+  // useEffect(()=>{
+  //   // console.log(interviewInfo)
+  // }, [interviewInfo])
   return(
     <InterviewContext.Provider value={{interviewInfo , setInterviewInfo}}>{children}</InterviewContext.Provider>
   )

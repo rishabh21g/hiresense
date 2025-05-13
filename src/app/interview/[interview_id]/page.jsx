@@ -40,7 +40,8 @@ const InterviewJoining = () => {
         .eq("interview_id", interview_id);
       setInterviewInfo({
         userName: name,
-        email : email,
+        userEmail : email,
+        jobPosition : Interviews[0]?.jobPosition,
         questionList: Interviews[0]?.questionList,
       });
       console.log(interviewInfo);
