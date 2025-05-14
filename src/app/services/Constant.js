@@ -62,7 +62,7 @@ type: 'Technical/Behavioral/Experince/Problem Solving/Leadership'
 }.{
 The goal is to create a structured, relevant, and time-optimized interview plan for a {{jobTitle}} role.`;
 
- export const feedbackForm = ` {{conversation}}
+export const feedbackForm = ` {{conversation}}
 Depends on this Interview Conversation between assitant and user,
 Give me feedback for user interview. Give me rating out of 10 for technical Skills,
 Communication, Problem Solving, Experince. Also give me summery in 3 lines
@@ -80,4 +80,4 @@ summary:<in 3 Line>,
 Recommendation:",
 RecommendationMsg:"
 }
-`
+`;

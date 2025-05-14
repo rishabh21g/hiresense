@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { ArrowBigRight, ArrowRight, Copy, Send } from "lucide-react";
+import {  ArrowRight, Copy, Send } from "lucide-react";
 import moment from "moment";
+import Link from "next/link";
 import React from "react";
 import { toast } from "sonner";
 
@@ -23,7 +24,7 @@ const InterviewListComponent = ({ interview, viewDetails = false }) => {
     const interviewLink =
       process.env.NEXT_PUBLIC_DOMAIN_URL +
       "/interview/" +
-      interview?.interview_id; // Assuming NEXT_DOMAIN_URL also needs to be public
+      interview?.interview_id; 
     const subject = `Interview Invitation: ${
       interview?.jobPosition || "Opportunity"
     }`;
@@ -51,7 +52,7 @@ const InterviewListComponent = ({ interview, viewDetails = false }) => {
           <span className="font-medium">Duration:</span>{" "}
           {interview?.duration ? `${interview?.duration} ` : "Not set"}
           <span className="text-sm text-green-600">
-            Candidates: {interview?.Feedback?.length }
+            Candidates: {interview?.Feedback?.length}
           </span>
         </div>
       </div>
@@ -77,9 +78,15 @@ const InterviewListComponent = ({ interview, viewDetails = false }) => {
             </Button>
           </div>
         ) : (
-          <Button className="w-full" variant="default" size="sm">
-            <ArrowRight className=" h-4 w-full" /> View Details
-          </Button>
+          <Link
+            href={
+              "/scheduled-interview/" + interview?.interview_id + "/details"
+            }
+         className="w-full" >
+            <Button className="w-full" variant="default" size="sm">
+              <ArrowRight className=" h-4 w-full" /> View Details
+            </Button>
+          </Link>
         )}
       </div>
     </div>
