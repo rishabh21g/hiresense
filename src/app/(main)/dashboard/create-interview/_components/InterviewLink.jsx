@@ -37,7 +37,7 @@ const InterviewLinkPage = ({ interviewId, formData }) => {
             <div className="flex items-center gap-2">
               <Input
                 readOnly
-                value={"http://localhost:3000/" + interviewId}
+                value={process.env.NEXT_PUBLIC_HOST_DOMAIN_URL+ interviewId}
                 className="flex-1"
                 ref={ref}
               />

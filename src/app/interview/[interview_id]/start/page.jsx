@@ -23,7 +23,6 @@ const StartInterview = () => {
     console.log(questions);
 
     try {
-      console.log(process.env.NEXT_PUBLIC_VAPI_API_KEY);
       await vapi.start(assistantOptions);
     } catch (error) {
       console.log(error);

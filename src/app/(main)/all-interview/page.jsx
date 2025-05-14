@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button";
 import { useUser } from "@/context/UserContext";
 import { Camera } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import InterviewListComponent from "./InterviewListComponent";
+import InterviewListComponent from "../dashboard/_components/InterviewListComponent";
 
-const InterviewList = () => {
+const AllInterview = () => {
   const [interviewList, setInterviewList] = useState([]);
   const { user } = useUser();
   const getInterviewList = async () => {
@@ -15,7 +15,7 @@ const InterviewList = () => {
         .from("Interviews")
         .select("*")
         .eq("userEmail", user?.email);
-      // console.log(Interviews);
+      console.log(Interviews);
       setInterviewList(Interviews);
     } catch (err) {
       console.log(err);
@@ -23,13 +23,13 @@ const InterviewList = () => {
   };
   useEffect(() => {
     if (user) {
-      // console.log(user);
+      console.log(user);
       getInterviewList();
     }
   }, [user]);
   return (
     <div className="p-5 mx-auto w-full">
-      <h2 className="font-bold text-2xl">Previous Interviews</h2>
+      <h2 className="font-bold text-2xl">All Interviews</h2>
       <div className="my-3">
         {interviewList.length === 0 && (
           <div className="flex flex-col items-center justify-center px-4 text-center">
@@ -52,4 +52,4 @@ const InterviewList = () => {
   );
 };
 
-export default InterviewList;
+export default AllInterview;

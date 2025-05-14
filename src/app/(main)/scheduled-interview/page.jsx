@@ -1,37 +1,35 @@
 "use client";
 import { sb } from "@/app/services/supabaseClient";
-import { Button } from "@/components/ui/button";
 import { useUser } from "@/context/UserContext";
-import { Camera } from "lucide-react";
 import React, { useEffect, useState } from "react";
-import InterviewListComponent from "./InterviewListComponent";
+import InterviewListComponent from "../dashboard/_components/InterviewListComponent";
+import { Camera } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-const InterviewList = () => {
-  const [interviewList, setInterviewList] = useState([]);
+const ScheduledInterview = () => {
+  const [interviewDetails, setInterviewDetails] = useState([]);
   const { user } = useUser();
-  const getInterviewList = async () => {
+  const getInterviewData = async () => {
     try {
       let { data: Interviews, error } = await sb
         .from("Interviews")
-        .select("*")
-        .eq("userEmail", user?.email);
-      // console.log(Interviews);
-      setInterviewList(Interviews);
+        .select("jobPosition,duration,interview_id,Feedback(userEmail)")
+        .eq("userEmail", user?.email)
+        .order("id", { ascending: false });
+      console.log(Interviews);
+      setInterviewDetails(Interviews);
     } catch (err) {
       console.log(err);
     }
   };
   useEffect(() => {
-    if (user) {
-      // console.log(user);
-      getInterviewList();
-    }
+    user && getInterviewData();
   }, [user]);
   return (
-    <div className="p-5 mx-auto w-full">
-      <h2 className="font-bold text-2xl">Previous Interviews</h2>
-      <div className="my-3">
-        {interviewList.length === 0 && (
+    <div className="gap-4">
+      <h1 className="text-2xl font-bold text-center">Interview list with candidate details</h1>
+      <div className="p-5 mx-auto w-full">
+        {interviewDetails?.length === 0 && (
           <div className="flex flex-col items-center justify-center px-4 text-center">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 flex items-center gap-2 mb-2">
               No Interviews Found
@@ -45,11 +43,13 @@ const InterviewList = () => {
             </Button>
           </div>
         )}
-        {interviewList.length > 0 && interviewList.map((interview, index) => <InterviewListComponent key={index} interview={interview}/>
-        )}
+        {interviewDetails.length > 0 &&
+          interviewDetails.map((interview, index) => (
+            <InterviewListComponent key={index} interview={interview} viewDetails= {true} />
+          ))}
       </div>
     </div>
   );
 };
 
-export default InterviewList;
+export default ScheduledInterview;
