@@ -28,24 +28,27 @@ const InterviewList = () => {
     }
   }, [user]);
   return (
-    <div className="p-5 mx-auto w-full">
-      <h2 className="font-bold text-2xl">Previous Interviews</h2>
-      <div className="my-3">
+    <div className="px-4 py-6 sm:px-0"> {/* Adjusted padding, sm:px-0 if container mx-auto handles it */}
+      <h2 className="font-bold text-2xl sm:text-3xl text-gray-800 mb-6">Previous Interviews</h2>
+      <div className="mt-4"> {/* Adjusted margin */}
         {interviewList.length === 0 && (
-          <div className="flex flex-col items-center justify-center px-4 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 flex items-center gap-2 mb-2">
+          <div className="flex flex-col items-center justify-center p-8 sm:p-12 text-center bg-transparent rounded-xl shadow-lg">
+            <Camera className="size-16 sm:size-20 text-[#077a7d] mb-6 opacity-75" />
+            <h3 className="text-xl sm:text-2xl font-semibold text-gray-700 mb-3">
               No Interviews Found
-              <Camera className="size-8 text-gray-500 animate-pulse" />
-            </h2>
-            <p className="text-gray-600 text-sm sm:text-base mb-6">
+            </h3>
+            <p className="text-gray-500 text-sm sm:text-base mb-8 max-w-md mx-auto">
               You haven’t organized any interviews yet. Let’s get started!
             </p>
-            <Button className="bg-amber-400 hover:bg-amber-200  font-bold text-lg px-6 py-3 transition duration-200 text-black">
+            <Button className="bg-[#077a7d] hover:bg-[#055e60] text-white font-semibold text-md sm:text-lg px-8 py-3 rounded-lg transition duration-200 ease-in-out shadow-md hover:shadow-lg">
               Organize New
             </Button>
           </div>
         )}
-        {interviewList.length > 0 && interviewList.map((interview, index) => <InterviewListComponent key={index} interview={interview}/>
+        {interviewList.length > 0 && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {interviewList.map((interview, index) => <InterviewListComponent key={index} interview={interview}/>)}
+          </div>
         )}
       </div>
     </div>
