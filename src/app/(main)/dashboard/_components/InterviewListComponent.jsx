@@ -38,7 +38,7 @@ const InterviewListComponent = ({ interview, viewDetails = false }) => {
 
   return (
     // Removed w-72, width will be handled by the parent grid
-    <div className="bg-white rounded-xl border border-gray-200 shadow-md p-5 flex flex-col hover:shadow-lg transition-shadow duration-300 ease-in-out">
+    <div className="bg-white rounded-xl border border-gray-200 shadow-md p-5 flex flex-col hover:shadow-lg transition-shadow duration-300 ease-in-out w-80 h-60">
       <div className="flex-grow mb-4">
         <h3
           className="text-lg font-semibold text-[#077a7d] capitalize truncate"
@@ -68,7 +68,7 @@ const InterviewListComponent = ({ interview, viewDetails = false }) => {
               onClick={copyLink}
               className="flex-1 text-[#077a7d] border-[#077a7d] hover:bg-[#077a7d]/10"
             >
-              <Copy className="mr-2 h-4 w-4" /> Copy Link
+              <Copy className="mr-2 h-4 w-1/2" /> Copy Link
             </Button>
             <Button
               variant="default"
@@ -76,7 +76,7 @@ const InterviewListComponent = ({ interview, viewDetails = false }) => {
               onClick={handleSend}
               className="flex-1 bg-[#077a7d] hover:bg-[#055e60] text-white"
             >
-              <Send className="mr-2 h-4 w-4" /> Send Invite
+              <Send className="mr-2 h-4 w-1/2" /> Send Invite
             </Button>
           </div>
         ) : (

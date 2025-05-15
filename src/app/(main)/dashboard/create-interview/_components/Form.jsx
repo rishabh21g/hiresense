@@ -13,7 +13,7 @@ const InterviewForm = ({ handleFormData, formData, setsteps }) => {
     ) {
       toast("Please fill up all the details");
     } else {
-      console.log(formData);
+      // console.log(formData);
       setsteps((prev) => prev + 1);
     }
   };
@@ -22,7 +22,7 @@ const InterviewForm = ({ handleFormData, formData, setsteps }) => {
     handleFormData("types", selectTypes);
   }, [selectTypes]);
   return (
-    <div className="flex flex-col gap-6 w-full mx-auto mt-10 p-6  shadow-md rounded-xl">
+    <div className="flex flex-col gap-6 w-full">
       {/* Job Position */}
       <div>
         <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -32,7 +32,7 @@ const InterviewForm = ({ handleFormData, formData, setsteps }) => {
           type="text"
           placeholder="e.g. Fullstack MERN Developer"
           onChange={(e) => handleFormData("jobPosition", e.target.value)}
-          className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-teal-500"
         />
       </div>
 
@@ -45,7 +45,7 @@ const InterviewForm = ({ handleFormData, formData, setsteps }) => {
           placeholder="Short job description..."
           onChange={(e) => handleFormData("jobDescription", e.target.value)}
           rows={4}
-          className="w-full px-4 py-2 border rounded-lg outline-none resize-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded-lg outline-none resize-none focus:ring-2 focus:ring-teal-500"
         />
       </div>
 
@@ -56,10 +56,10 @@ const InterviewForm = ({ handleFormData, formData, setsteps }) => {
         </label>
         <select
           onChange={(e) => handleFormData("duration", e.target.value)}
-          className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 focus:ring-teal-500"
         >
-          <option value="15min">15 min</option>
-          <option value="30min">30 min</option>
+          <option value="15min" className="hover:text-teal-600">15 min</option>
+          <option value="30min" className="hover:text-teal-600">30 min</option>
           <option value="45min">45 min</option>
           <option value="1hr">1 hr</option>
         </select>
@@ -76,8 +76,10 @@ const InterviewForm = ({ handleFormData, formData, setsteps }) => {
             return (
               <p
                 key={idx}
-                className={`flex items-center gap-2 text-sm capitalize bg-gray-200 rounded-full justify-center p-3 cursor-pointer ${
-                  isSelected && "border border-black"
+                className={`flex items-center gap-2 text-sm capitalize rounded-full justify-center p-3 cursor-pointer transition-colors ${
+                  isSelected
+                    ? "bg-teal-600 text-white"
+                    : "bg-gray-200 text-gray-800 hover:bg-gray-300"
                 }`}
                 onClick={() =>
                   setSelectTypes((prevdata) =>
@@ -96,7 +98,7 @@ const InterviewForm = ({ handleFormData, formData, setsteps }) => {
 
       {/* Generate Button */}
       <button
-        className="mt-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition"
+        className="mt-4 bg-teal-600 hover:bg-teal-700 text-white font-semibold py-2 rounded-lg transition"
         onClick={goTonext}
       >
         Generate Questions

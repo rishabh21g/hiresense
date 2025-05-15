@@ -34,52 +34,51 @@ const QuestionList = ({ formData, createLink, setsteps, steps}) => {
     }
   };
 
-  const onFinish = async () => {
+  const onFinish = async () => { // Function to save questions and move to the next step
     setloader(true);
     const interview_id = uuidv4();
     try {
       const { data, error } = await sb
         .from("Interviews")
         .insert([
-          {
+          { // Data structure for the Interviews table
             questionList: questionList,
             userEmail: user.email,
             jobPosition: jobPosition,
             jobDescription: jobDescription,
             duration: duration,
             types: types,
-            interview_id: interview_id,
+            interview_id: interview_id, // Unique ID for the interview
           },
         ])
         .select();
-      console.log(data);
+      // console.log(data); // Log success data if needed
       setloader(false);
-      createLink(interview_id);
-      setsteps(steps + 1);
+      createLink(interview_id); // Pass the new interview ID back to the parent
+      setsteps(steps + 1); // Move to the next step (InterviewLink)
     } catch (err) {
       toast("Error while saving Questions!");
-      console.log(err);
+      console.error(err); // Log the actual error
       setloader(false);
     }
   };
 
   useEffect(() => {
-    if (formData) {
+    
+    if (formData && user) { // Ensure both formData and user are available
       generateQuestions();
-      // console.log(user);
-      // console.log(questionList);
     }
   }, [formData , user]);
 
   return (
-    <UserProvider>
-      <div className="w-full my-2 mx-auto flex flex-col items-center justify-center p-5">
+    <div className="flex flex-col items-center justify-center">
         {loading && (
-          <div className="flex flex-col gap-4 my-3 items-center rounded-lg bg-amber-100 p-6 border border-amber-300 w-full">
-            <h2 className="animate-pulse font-semibold text-lg flex items-center gap-2">
+          // Updated loading message styling to use teal/cyan colors
+          <div className="flex flex-col gap-4 my-3 items-center rounded-lg bg-teal-50 p-6 border border-teal-200 w-full">
+            <h2 className="font-semibold text-lg flex items-center gap-2">
               Wait for a while until we craft questions!
               <span>
-                <Loader className="animate-spin text-amber-400" />
+                <Loader className="animate-spin text-teal-600" /> {/* Changed loader color */}
               </span>
             </h2>
           </div>
@@ -88,7 +87,7 @@ const QuestionList = ({ formData, createLink, setsteps, steps}) => {
         {!loading && questionList?.length > 0 && (
           <div className="w-full mt-4">
             <h2 className="text-xl font-semibold mb-3">
-              Generated Questions:
+              Generated Questions: {/* Title for the question list */}
             </h2>
             <ul className="space-y-3">
               {questionList?.map((item, index) => (
@@ -101,21 +100,20 @@ const QuestionList = ({ formData, createLink, setsteps, steps}) => {
                 </li>
               ))}
             </ul>
+            {/* Finish Button - Uses default Button styling (should be primary/teal) */}
             <div className="flex items-end justify-end my-3">
-              <Button onClick={onFinish}>
-                {" "}
+              <Button onClick={onFinish} className={"bg-teal-600 hover:bg-teal-700"}>
                 {loader && (
                   <span className="animate-spin">
                     <Loader2 />
                   </span>
                 )}
-                Finish{" "}
+                Finish {/* Button text */}
               </Button>
             </div>
           </div>
         )}
       </div>
-    </UserProvider>
   );
 };
 

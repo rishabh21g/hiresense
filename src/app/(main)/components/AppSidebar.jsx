@@ -21,7 +21,7 @@ export default function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader>
-        <h1 className="text-center font-bold text-2xl my-4 p-2 flex items-center justify-center">Hiresense!<Image src={"/logo.svg"} width={44} height={44}/></h1>
+        <h1 className="text-center font-bold text-2xl my-4 p-2 flex items-center justify-center">Hiresense!<Image src={"/logo.svg"} width={44} height={44} alt="Hiresense Logo"/></h1>
         <Button className={"bg-[#077a7d] border-2 border-white text-white"}>
           New Interview <Plus />
         </Button>

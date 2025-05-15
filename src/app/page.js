@@ -1,8 +1,10 @@
+"use client";
 import Image from "next/image";
-import { UserProvider } from "@/context/UserContext";
+import { UserProvider, useUser } from "@/context/UserContext";
 import Link from "next/link";
 
 const HomePage = () => {
+  const { user } = useUser();
   return (
     <UserProvider>
       {" "}
@@ -45,12 +47,14 @@ const HomePage = () => {
               >
                 Features
               </a>
-              <Link
-                href="/dashboard"
-                className="px-2 sm:px-3 py-1 sm:py-2 hover:bg-[#055e60] rounded transition-colors ml-1 sm:ml-2 text-sm sm:text-base"
-              >
-                Dashboard
-              </Link>
+              {user?.email && (
+                <Link
+                  href="/dashboard"
+                  className="px-2 sm:px-3 py-1 sm:py-2 hover:bg-[#055e60] rounded transition-colors ml-1 sm:ml-2 text-sm sm:text-base"
+                >
+                  Dashboard
+                </Link>
+              )}
             </nav>
           </div>
         </header>
@@ -65,11 +69,19 @@ const HomePage = () => {
               Your AI-powered recruitment partner. Discover top talent or your
               dream job with unparalleled efficiency.
             </p>
-            <Link href={"/auth"}>
-              <button className="bg-[#077a7d] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg text-md sm:text-lg font-semibold hover:bg-[#055e60] transition-colors shadow-md hover:shadow-lg">
-                Get Started
-              </button>
-            </Link>
+            {user?.email ? (
+              <Link href={"/dashboard"}>
+                <button className="bg-[#077a7d] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg text-md sm:text-lg font-semibold hover:bg-[#055e60] transition-colors shadow-md hover:shadow-lg">
+                  Get Started
+                </button>
+              </Link>
+            ) : (
+              <Link href={"/auth"}>
+                <button className="bg-[#077a7d] text-white px-6 sm:px-8 py-2 sm:py-3 rounded-lg text-md sm:text-lg font-semibold hover:bg-[#055e60] transition-colors shadow-md hover:shadow-lg">
+                  Get Started
+                </button>
+              </Link>
+            )}
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

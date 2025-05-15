@@ -27,7 +27,7 @@ const CreateInterview = () => {
   };
 
   useEffect(() => {
-    console.log(formData);
+    // console.log(formData);
   }, [formData]);
   return (
     <UserProvider>
