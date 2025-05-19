@@ -15,12 +15,10 @@ const CreateInterview = () => {
  
   const router = useRouter();
   const handleFormData = (field, value) => {
-    setFormData((prevData) => {
-      return setFormData({
-        ...prevData,
-        [field]: value,
-      });
-    });
+    setFormData((prevData) => ({
+      ...prevData,
+      [field]: value,
+    }));
   };
   const createLink = (interview_id) => {
     setinterviewId(interview_id);
