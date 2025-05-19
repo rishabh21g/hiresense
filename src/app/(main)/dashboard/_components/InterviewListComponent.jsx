@@ -9,7 +9,7 @@ const InterviewListComponent = ({ interview, viewDetails = false }) => {
   const copyLink = async () => {
     const interviewLink =
       process.env.NEXT_PUBLIC_HOST_DOMAIN_URL +
-      "/interview/" +
+      "interview/" +
       interview?.interview_id;
     await navigator.clipboard.writeText(interviewLink);
     toast("Copied Successfully");
@@ -23,7 +23,7 @@ const InterviewListComponent = ({ interview, viewDetails = false }) => {
 
     const interviewLink =
       process.env.NEXT_PUBLIC_DOMAIN_URL +
-      "/interview/" +
+      "interview/" +
       interview?.interview_id; 
     const subject = `Interview Invitation: ${
       interview?.jobPosition || "Opportunity"

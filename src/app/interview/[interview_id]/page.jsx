@@ -57,8 +57,8 @@ const InterviewJoining = () => {
   }, []);
   return (
     <InterviewContextProvider>
-      <div className="min-h-screen bg-white flex items-center justify-center px-4">
-        <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-6 border border-gray-200">
+      <div className="min-h-screen bg-teal-100 flex items-center justify-center px-4 ">
+        <div className="w-full max-w-md bg-teal-50 rounded-2xl shadow-lg p-6 border border-teal-200">
           {/* Logo & Heading */}
           <div className="text-center mb-6">
             <h1 className="text-2xl font-bold text-gray-900">Hiresense</h1>
@@ -87,20 +87,20 @@ const InterviewJoining = () => {
               placeholder="Enter your full name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400"
+              className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400"
             />
             <input
               type="email"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-400"
+              className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-400"
             />
           </div>
 
           {/* Tips Box */}
-          <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 mt-6 text-sm text-gray-700">
-            <p className="font-semibold text-blue-800 mb-2 flex items-center   gap-2">
+          <div className="bg-teal-50 border border-teal-200 rounded-xl p-4 mt-6 text-sm text-gray-700">
+            <p className="font-semibold text-teal-800 mb-2 flex items-center   gap-2">
               <span>
                 <MessageCircleWarning />
               </span>
@@ -118,12 +118,12 @@ const InterviewJoining = () => {
             disabled={!isFormValid}
             className={`w-full mt-6 py-2 rounded-xl font-semibold transition items-center justify-center flex ${
               isFormValid
-                ? "bg-amber-500 text-white hover:bg-amber-600"
-                : "bg-amber-200 text-white cursor-not-allowed"
+                ? "bg-teal-500 text-gray-600 hover:bg-teal-600"
+                : "bg-teal-200 text-gray-600 cursor-not-allowed"
             }`}
             onClick={startInterview}
           >
-            <span className="text-amber-300 mx-2">
+            <span className="text-teal-300 mx-2">
               <VideoIcon />
             </span>{" "}
             Join Interview
@@ -131,7 +131,7 @@ const InterviewJoining = () => {
 
           {/* Interview ID */}
           <p className="text-xs text-center text-gray-400 mt-4">
-            Interview ID: <span className="text-amber-500">{interview_id}</span>
+            Interview ID: <span className="text-teal-500">{interview_id}</span>
           </p>
         </div>
       </div>

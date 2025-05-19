@@ -1,5 +1,5 @@
 "use client";
-import { Mic, MicOff } from "lucide-react";
+import { Loader, LucideLoaderCircle, Mic, MicOff, MicVocalIcon } from "lucide-react";
 import { useInterview } from "@/context/InterviewDataContext";
 import Vapi from "@vapi-ai/web";
 import { useEffect, useState } from "react";
@@ -12,6 +12,7 @@ const StartInterview = () => {
   const { interviewInfo } = useInterview();
   const [activeUser, setActiveUser] = useState(null);
   const [conversation, setConversation] = useState();
+  const [loader, setLoader] = useState(false);
   const { interview_id } = useParams();
   const router = useRouter();
   const vapi = new Vapi(process.env.NEXT_PUBLIC_VAPI_API_KEY);
@@ -143,9 +144,11 @@ const StartInterview = () => {
       toast("Call connected!");
     });
     vapi.on("call-end", () => {
+      setLoader(true)
       console.log("Call has ended.");
       toast("Call ended!");
       GenerateFeedback();
+      setLoader(false)
     });
     return () => {
       vapi.off("message", handleConvo);
@@ -156,42 +159,38 @@ const StartInterview = () => {
     };
   }, []);
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center p-4">
+    <div className="min-h-screen  text-gray-100 flex items-center justify-center p-4 w-full bg-teal-100">
       <div className="max-w-5xl w-full relative">
-        <h2 className="text-2xl font-bold mb-6 text-center">
+        <h2 className="text-3xl  mb-6 text-center font-extrabold  text-teal-950">
           AI Interview Session
         </h2>
 
         {/* Interview Panels */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* AI Interviewer */}
-          <div className="rounded-xl bg-gray-800 h-64 flex flex-col items-center justify-center relative shadow-lg">
-            <div className="text-xl font-semibold">AI Interviewer</div>
+          <div className="rounded-xl bg-teal-200 h-64 flex flex-col items-center justify-center relative shadow-lg border-2 border-teal-600">
+            <div className="text-xl font-semibold text-teal-950">Hiresense</div>
             <span className="absolute bottom-3 left-3 bg-black bg-opacity-50 px-2 py-1 rounded text-sm">
-              AI Interviewer
+              Hiresense AI
             </span>
             {!activeUser && (
-              <div className="flex gap-2 mt-4 animate-pulse">
-                <div className="w-3.5 h-3.5 rounded-full bg-green-500 animate-bounce [animation-delay:.7s]"></div>
-                <div className="w-3.5 h-3.5 rounded-full bg-green-500 animate-bounce [animation-delay:.3s]"></div>
-                <div className="w-3.5 h-3.5 rounded-full bg-green-500 animate-bounce [animation-delay:.7s]"></div>
+              <div className="flex gap-2 mt-4 animate-spin my-5 items-center justify-center text-teal-700">
+               <LucideLoaderCircle/>
               </div>
             )}
           </div>
 
           {/* User */}
-          <div className="rounded-xl bg-gray-700 h-64 flex flex-col items-center justify-center relative shadow-lg">
-            <div className="text-xl font-semibold">
+          <div className="rounded-xl bg-teal-200 h-64 flex flex-col items-center justify-center relative shadow-lg border-2 border-teal-600">
+            <div className="text-xl font-semibold text-teal-950">
               {interviewInfo?.userName || "You"}
             </div>
             <span className="absolute bottom-3 left-3 bg-black bg-opacity-50 px-2 py-1 rounded text-sm">
               You
             </span>
             {activeUser && (
-              <div className="flex gap-2 mt-4 animate-pulse">
-                <div className="w-3.5 h-3.5 rounded-full bg-green-500 animate-bounce [animation-delay:.7s]"></div>
-                <div className="w-3.5 h-3.5 rounded-full bg-green-500 animate-bounce [animation-delay:.3s]"></div>
-                <div className="w-3.5 h-3.5 rounded-full bg-green-500 animate-bounce [animation-delay:.7s]"></div>
+               <div className="flex gap-2 mt-4 animate-spin my-5 items-center justify-center text-teal-700">
+               <LucideLoaderCircle/>
               </div>
             )}
           </div>
@@ -202,23 +201,19 @@ const StartInterview = () => {
           <button className="bg-gray-700 hover:bg-gray-600 p-3 rounded-full transition duration-300">
             <Mic className="w-6 h-6 text-white" />
           </button>
-          <button
+         { !loader? (<button
             className="bg-red-600 hover:bg-red-300 p-3 rounded-full transition duration-300"
             onClick={() => vapi.stop()}
           >
-            <MicOff className="w-6 h-6 text-white" />
-          </button>
+            <MicVocalIcon className="w-6 h-6 text-white" />
+          </button>): <button className="bg-red-600  p-3 rounded-full transition duration-300 animate-spin"><Loader/></button>}
         </div>
 
         {/* Status Text */}
-        <p className="text-center mt-4 text-gray-400">
+        <p className="text-center mt-4  text-teal-950 font-bold">
           Interview in progress...
         </p>
 
-        {/* Timer (Top Right) */}
-        <div className="absolute top-4 right-6 text-gray-400 text-sm">
-          <span>00:05:23</span>
-        </div>
       </div>
     </div>
   );

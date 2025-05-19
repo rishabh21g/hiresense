@@ -18,7 +18,7 @@ const QuestionList = ({ formData, createLink, setsteps, steps}) => {
     try {
       setloading(true);
       const result = await axios.post("/api/questions", { ...formData });
-      // console.log(result);
+      console.log(result);
       const jsonList = result?.data?.content;
       // console.log(jsonList);
       const jsonArr = jsonList.replace("```json", "").replace("```", "").trim();
