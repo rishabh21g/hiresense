@@ -37,11 +37,15 @@ const InterviewLinkPage = ({ interviewId, formData }) => {
             <div className="flex items-center gap-2">
               <Input
                 readOnly
-                value={process.env.NEXT_PUBLIC_HOST_DOMAIN_URL+ interviewId}
+                value={"https://hiresense.vercel.app/" + interviewId}
                 className="flex-1"
                 ref={ref}
               />
-              <Button onClick={handleCopy} size="sm" className="bg-teal-600 hover:bg-teal-700 text-white">
+              <Button
+                onClick={handleCopy}
+                size="sm"
+                className="bg-teal-600 hover:bg-teal-700 text-white"
+              >
                 {copied ? (
                   <Check className="w-4 h-4" />
                 ) : (
@@ -51,7 +55,7 @@ const InterviewLinkPage = ({ interviewId, formData }) => {
               </Button>
             </div>
           </div>
-{/* 
+          {/* 
           <div className="mt-6">
             <p className="text-sm font-semibold text-gray-700 mb-2">
               Share via
@@ -82,11 +86,11 @@ const InterviewLinkPage = ({ interviewId, formData }) => {
           </div> */}
 
           <div className="mt-6 flex text-center items-center justify-center text-sm text-blue-600 font-semibold">
-           <Link href={"/dashboard"}>
-           <button onClick={() => toast("Back to dashboard")}>
-              {"< Back to Dashboard"}
-            </button>
-           </Link>
+            <Link href={"/dashboard"}>
+              <button onClick={() => toast("Back to dashboard")}>
+                {"< Back to Dashboard"}
+              </button>
+            </Link>
           </div>
         </div>
       </div>

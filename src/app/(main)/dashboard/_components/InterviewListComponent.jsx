@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import {  ArrowRight, Copy, Send } from "lucide-react";
+import { ArrowRight, Copy, Send } from "lucide-react";
 import moment from "moment";
 import Link from "next/link";
 import React from "react";
@@ -8,9 +8,7 @@ import { toast } from "sonner";
 const InterviewListComponent = ({ interview, viewDetails = false }) => {
   const copyLink = async () => {
     const interviewLink =
-      process.env.NEXT_PUBLIC_HOST_DOMAIN_URL +
-      "interview/" +
-      interview?.interview_id;
+      "https://hiresense.vercel.app/" + "interview/" + interview?.interview_id;
     await navigator.clipboard.writeText(interviewLink);
     toast("Copied Successfully");
   };
@@ -22,9 +20,7 @@ const InterviewListComponent = ({ interview, viewDetails = false }) => {
     }
 
     const interviewLink =
-      process.env.NEXT_PUBLIC_DOMAIN_URL +
-      "interview/" +
-      interview?.interview_id; 
+      "https://hiresense.vercel.app/" + "interview/" + interview?.interview_id;
     const subject = `Interview Invitation: ${
       interview?.jobPosition || "Opportunity"
     }`;
@@ -50,11 +46,15 @@ const InterviewListComponent = ({ interview, viewDetails = false }) => {
           Created: {moment(interview?.created_at).format("MMMM Do, YYYY")}
         </p>
         <div className="text-sm text-gray-600 mt-2 space-y-1">
-          <p><span className="font-medium text-gray-700">Duration:</span>{" "}
+          <p>
+            <span className="font-medium text-gray-700">Duration:</span>{" "}
             {interview?.duration ? `${interview?.duration} mins` : "Not set"}
           </p>
-          <p><span className="font-medium text-gray-700">Candidates:</span>{" "}
-            <span className="text-green-600 font-medium">{interview?.Feedback?.length || 0}</span>
+          <p>
+            <span className="font-medium text-gray-700">Candidates:</span>{" "}
+            <span className="text-green-600 font-medium">
+              {interview?.Feedback?.length || 0}
+            </span>
           </p>
         </div>
       </div>
@@ -82,8 +82,13 @@ const InterviewListComponent = ({ interview, viewDetails = false }) => {
         ) : (
           <Link
             href={`/scheduled-interview/${interview?.interview_id}/details`}
-            className="w-full" >
-            <Button className="w-full bg-[#077a7d] hover:bg-[#055e60] text-white" variant="default" size="sm">
+            className="w-full"
+          >
+            <Button
+              className="w-full bg-[#077a7d] hover:bg-[#055e60] text-white"
+              variant="default"
+              size="sm"
+            >
               View Details <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
