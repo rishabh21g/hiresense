@@ -34,39 +34,38 @@ const InterviewListComponent = ({ interview, viewDetails = false }) => {
 
   return (
     // Removed w-72, width will be handled by the parent grid
-    <div className="bg-white rounded-xl border border-gray-200 shadow-md p-5 flex flex-col hover:shadow-lg transition-shadow duration-300 ease-in-out w-80 h-60">
+    <div className="bg-card text-card-foreground rounded-xl border shadow-md p-5 flex flex-col hover:shadow-lg transition-shadow duration-300 ease-in-out w-80 h-60">
       <div className="flex-grow mb-4">
         <h3
-          className="text-lg font-semibold text-[#077a7d] capitalize truncate"
+          className="text-lg font-semibold text-primary capitalize truncate"
           title={interview?.jobPosition}
         >
           {interview?.jobPosition || "Untitled Interview"}
         </h3>
-        <p className="text-xs text-gray-500 mt-1 mb-3">
+        <p className="text-xs text-muted-foreground mt-1 mb-3">
           Created: {moment(interview?.created_at).format("MMMM Do, YYYY")}
         </p>
-        <div className="text-sm text-gray-600 mt-2 space-y-1">
+        <div className="text-sm text-muted-foreground mt-2 space-y-1">
           <p>
-            <span className="font-medium text-gray-700">Duration:</span>{" "}
+            <span className="font-medium text-card-foreground">Duration:</span>{" "}
             {interview?.duration ? `${interview?.duration} mins` : "Not set"}
           </p>
           <p>
-            <span className="font-medium text-gray-700">Candidates:</span>{" "}
+            <span className="font-medium text-card-foreground">Candidates:</span>{" "}
             <span className="text-green-600 font-medium">
               {interview?.Feedback?.length || 0}
             </span>
           </p>
         </div>
       </div>
-
-      <div className="mt-auto pt-4 border-t border-gray-200">
+      <div className="mt-auto pt-4 border-t border-border">
         {!viewDetails ? (
           <div className="flex items-center gap-3">
             <Button
               variant="outline"
               size="sm"
               onClick={copyLink}
-              className="flex-1 text-[#077a7d] border-[#077a7d] hover:bg-[#077a7d]/10"
+              className="flex-1 text-primary border-primary hover:bg-primary/10 hover:text-primary"
             >
               <Copy className="mr-2 h-4 w-1/2" /> Copy Link
             </Button>
@@ -74,7 +73,7 @@ const InterviewListComponent = ({ interview, viewDetails = false }) => {
               variant="default"
               size="sm"
               onClick={handleSend}
-              className="flex-1 bg-[#077a7d] hover:bg-[#055e60] text-white"
+              className="flex-1" // Relies on variant="default" for primary styling
             >
               <Send className="mr-2 h-4 w-1/2" /> Send Invite
             </Button>
@@ -85,7 +84,7 @@ const InterviewListComponent = ({ interview, viewDetails = false }) => {
             className="w-full"
           >
             <Button
-              className="w-full bg-[#077a7d] hover:bg-[#055e60] text-white"
+              className="w-full" // Relies on variant="default" for primary styling
               variant="default"
               size="sm"
             >
