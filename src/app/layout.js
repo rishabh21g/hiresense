@@ -19,20 +19,6 @@ export const metadata = {
   description: "AI powered Recruiter!",
 };
 
-// export default function RootLayout({ children }) {
-//   return (
-//     <html lang="en">
-//       <body className="dark">
-//         <UserProvider>
-         
-//           {children}
-//         </UserProvider>
-//       </body>
-//     </html>
-//   );
-// }
-
-
 export default function RootLayout({ children }) {
   return (
     <>
