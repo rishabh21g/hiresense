@@ -12,7 +12,7 @@ const HomePage = () => {
 
   return (
     <UserProvider>
-      <div className="flex flex-col min-h-screen w-full max-w-7xl mx-auto ">
+      <div className="flex flex-col min-h-screen w-full max-w-7xl mx-auto p-8">
         <Navbar />
         <HeroSection />
         <HowItWorks/>
