@@ -8,11 +8,11 @@ import { HowItWorks } from "./(main)/components/Working";
 import { Features } from "./(main)/components/Features";
 
 const HomePage = () => {
-  const { user } = useUser();
+
 
   return (
     <UserProvider>
-      <div className="flex flex-col min-h-screen w-full ">
+      <div className="flex flex-col min-h-screen w-full max-w-7xl mx-auto ">
         <Navbar />
         <HeroSection />
         <HowItWorks/>

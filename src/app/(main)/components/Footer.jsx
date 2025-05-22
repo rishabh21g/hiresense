@@ -13,7 +13,7 @@ export function Footer() {
 
       <div className="container px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-primary via-teal-500 to-primary bg-clip-text text-transparent mb-4">
-          Let’s Connect -Hiresense
+          Let’s Connect -with our dev of Hiresense
         </h2>
         <p className="text-muted-foreground text-lg max-w-2xl mx-auto mb-8">
           Built by Rishabh Gupta. Reach out for collaboration, opportunities, or just to say hi!
