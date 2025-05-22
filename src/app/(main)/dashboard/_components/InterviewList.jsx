@@ -28,26 +28,34 @@ const InterviewList = () => {
     }
   }, [user]);
   return (
-    <div className="px-4 py-6 sm:px-0"> {/* Adjusted padding, sm:px-0 if container mx-auto handles it */}
-      <h2 className="font-bold text-2xl sm:text-3xl text-gray-800 mb-6">Previous Interviews</h2>
-      <div className="mt-4"> {/* Adjusted margin */}
+    <div className="px-4 py-6 sm:px-0">
+      {" "}
+      {/* Adjusted padding, sm:px-0 if container mx-auto handles it */}
+      <h2 className="font-bold text-2xl sm:text-3xl text-foreground mb-6">
+        Previous Interviews
+      </h2>
+      <div className="mt-4">
+        {" "}
+        {/* Adjusted margin */}
         {interviewList.length === 0 && (
-          <div className="flex flex-col items-center justify-center p-8 sm:p-12 text-center bg-transparent rounded-xl shadow-lg">
-            <Camera className="size-16 sm:size-20 text-[#077a7d] mb-6 opacity-75" />
-            <h3 className="text-xl sm:text-2xl font-semibold text-gray-700 mb-3">
+          <div className="flex flex-col items-center justify-center text-center px-6 py-12 sm:py-16 bg-card border rounded-2xl shadow-xl">
+            <Camera className="w-16 h-16 sm:w-20 sm:h-20 text-primary mb-6 opacity-80" />
+            <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
               No Interviews Found
             </h3>
-            <p className="text-gray-500 text-sm sm:text-base mb-8 max-w-md mx-auto">
+            <p className="text-muted-foreground text-base sm:text-lg max-w-md mx-auto mb-6">
               You haven’t organized any interviews yet. Let’s get started!
             </p>
-            <Button className="bg-[#077a7d] hover:bg-[#055e60] text-white font-semibold text-md sm:text-lg px-8 py-3 rounded-lg transition duration-200 ease-in-out shadow-md hover:shadow-lg">
+            <Button className="text-base sm:text-lg px-6 sm:px-8 py-2.5 rounded-xl">
               Organize New
             </Button>
           </div>
         )}
         {interviewList.length > 0 && (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {interviewList.map((interview, index) => <InterviewListComponent key={index} interview={interview}/>)}
+            {interviewList.map((interview, index) => (
+              <InterviewListComponent key={index} interview={interview} />
+            ))}
           </div>
         )}
       </div>

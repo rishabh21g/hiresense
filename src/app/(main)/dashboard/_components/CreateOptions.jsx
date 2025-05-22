@@ -13,7 +13,7 @@ const CreateOptions = () => {
       <div className="max-w-3xl mx-auto">
         <Link
           href="/dashboard/create-interview"
-          className="group block bg-white dark:bg-gray-900 rounded-xl shadow-md border border-transparent hover:border-primary transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg p-6 flex items-center gap-6"
+          className="group flex bg-white dark:bg-gray-900 rounded-xl shadow-md border border-transparent hover:border-primary transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-lg p-6  items-center gap-6"
         >
           <div className="flex-shrink-0 bg-primary text-white rounded-full p-4 grid place-items-center transition-colors duration-300 group-hover:bg-primary/90">
             <AtomIcon size={28} />

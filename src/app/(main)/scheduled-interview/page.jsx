@@ -30,18 +30,19 @@ const ScheduledInterview = () => {
       <h1 className="text-2xl font-bold text-center">Interview list with candidate details</h1>
       <div className="p-5 mx-auto w-full">
         {interviewDetails?.length === 0 && (
-          <div className="flex flex-col items-center justify-center px-4 text-center">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 flex items-center gap-2 mb-2">
-              No Interviews Found
-              <Camera className="size-8 text-gray-500 animate-pulse" />
-            </h2>
-            <p className="text-gray-600 text-sm sm:text-base mb-6">
-              You haven’t organized any interviews yet. Let’s get started!
-            </p>
-            <Button className="bg-amber-400 hover:bg-amber-200  font-bold text-lg px-6 py-3 transition duration-200 text-black">
-              Organize New
-            </Button>
-          </div>
+              <div className="flex flex-col items-center justify-center text-center px-6 py-12 sm:py-16 bg-card border rounded-2xl shadow-xl">
+              <Camera className="w-16 h-16 sm:w-20 sm:h-20 text-primary mb-6 opacity-80" />
+              <h3 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
+                No Interviews Found
+              </h3>
+              <p className="text-muted-foreground text-base sm:text-lg max-w-md mx-auto mb-6">
+                You haven’t organized any interviews yet. Let’s get started!
+              </p>
+              <Button className="text-base sm:text-lg px-6 sm:px-8 py-2.5 rounded-xl">
+                Organize New
+              </Button>
+            </div>
+        
         )}
         {interviewDetails.length > 0 &&
           interviewDetails.map((interview, index) => (

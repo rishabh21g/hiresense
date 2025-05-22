@@ -57,8 +57,8 @@ const InterviewJoining = () => {
   }, []);
   return (
     <InterviewContextProvider>
-      <div className="min-h-screen bg-teal-100 flex items-center justify-center px-4 ">
-        <div className="w-full max-w-md bg-teal-50 rounded-2xl shadow-lg p-6 border border-teal-200">
+      <div className="min-h-screen bg-background flex items-center justify-center px-4 ">
+        <div className="w-full max-w-md bg-teal-50 rounded-2xl shadow-2xl p-6 border border-teal-200">
           {/* Logo & Heading */}
           <div className="text-center mb-6">
             <h1 className="text-2xl font-bold text-gray-900">Hiresense</h1>
