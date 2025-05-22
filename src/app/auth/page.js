@@ -1,63 +1,46 @@
 "use client";
+
 import { BsGoogle } from "react-icons/bs";
-import Image from "next/image"; // Import Next.js Image component
+import Image from "next/image";
 import { sb } from "../services/supabaseClient";
 import Link from "next/link";
 
-const Auth = () => {
+export default function Auth() {
   const signInWithGoogle = async () => {
-    const { data: user, error: err } = await sb.auth.signInWithOAuth({
-      provider: "google",
-    });
-    if (err) {
-      console.log("Something went wrong: " + err);
-    } else {
-      console.log(user);
-    }
+    const { error } = await sb.auth.signInWithOAuth({ provider: "google" });
+    if (error) console.log("Something went wrong: " + error.message);
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4">
-      {/* Fixed Background (same as homepage) */}
-      <div className="fixed inset-0 -z-20 h-full w-full bg-transparent bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_0px,rgba(7,122,121,0.3),transparent)] -z-10" />
-      </div>
+    <div className="min-h-screen flex items-center justify-center px-4 relative bg-background">
+      {/* Same Radial Glow as Hero */}
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_800px_at_50%_0px,rgba(7,122,121,0.3),transparent)]" />
 
-      <div className="bg-transparent p-8 sm:p-10 md:p-12 rounded-xl shadow-2xl w-full max-w-md text-center border-4 border-[#077a7d] items-center justify-center flex flex-col ">
-        <div className="flex justify-center items-center mb-6 ">
-          <Image
-            src="/logo.svg" // Assuming your logo is in public/logo.svg
-            alt="Hiresense Logo"
-            width={48} // Adjust size as needed
-            height={48}
-            className="mr-3"
-          />
-          <h1 className="text-3xl sm:text-4xl font-bold text-[#077a7d]">
-            Hiresense
-          </h1>
+      <div className="w-full max-w-sm p-8 rounded-2xl bg-white/70 dark:bg-black/30 backdrop-blur border border-primary/20 shadow-md text-center">
+        <div className="flex items-center justify-center gap-3 mb-6">
+          <Image src="/logo.svg" alt="Hiresense Logo" width={40} height={40} />
+          <h1 className="text-2xl font-bold text-primary">Hiresense</h1>
         </div>
-        <p className="text-gray-600 mb-8 text-lg">
-          Sign in to unlock your potential.
+
+        <p className="text-muted-foreground mb-6 text-base">
+          Sign in to get started.
         </p>
+
         <button
           onClick={signInWithGoogle}
-          className="w-full flex items-center justify-center gap-x-3 py-3 px-6 rounded-lg bg-[#077A7D] text-white font-semibold text-lg hover:bg-[#055e60] focus:outline-none focus:ring-2 focus:ring-[#077A7D] focus:ring-opacity-50 transition duration-200 ease-in-out shadow-md hover:shadow-lg"
+          className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-lg bg-primary text-white hover:bg-primary/90 transition-all text-sm font-medium shadow"
         >
-          <BsGoogle size={20} /> Sign in with Google
+          <BsGoogle size={18} />
+          Sign in with Google
         </button>
-        <p className="mt-8 text-sm text-gray-500">
+
+        <p className="mt-6 text-xs text-muted-foreground">
           By signing in, you agree to our{" "}
-          <Link href="/terms" className="text-[#077a7d] hover:underline">
+          <Link href="/terms" className="text-primary underline-offset-2 hover:underline">
             Terms of Service
-          </Link>
-          .
+          </Link>.
         </p>
       </div>
     </div>
   );
-};
-
-
-
-
-export default Auth;
+}

@@ -6,6 +6,7 @@ import { HeroSection } from "./(main)/components/Hero";
 import { Footer } from "./(main)/components/Footer";
 import { HowItWorks } from "./(main)/components/Working";
 import { Features } from "./(main)/components/Features";
+import { PricingSection } from "./(main)/components/Pricing";
 
 const HomePage = () => {
 
@@ -17,6 +18,7 @@ const HomePage = () => {
         <HeroSection />
         <HowItWorks/>
         <Features/>
+        <PricingSection/>
         <Footer/>
       </div>
     </UserProvider>
