@@ -9,6 +9,12 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState();
 
   const getUserOrCreateUser = async () => {
+    // Check if Supabase client is available
+    if (!sb) {
+      console.warn("Supabase client not initialized. Please check your environment variables.");
+      return;
+    }
+
     try {
       const {
         data: { user },
